@@ -14,4 +14,4 @@ Installer les dépendances :
 
 Pour envoyer le Flow sur l'instance de Prefect :
 
-- `python flow.py`
+- `python example_simple\deploy.py`
