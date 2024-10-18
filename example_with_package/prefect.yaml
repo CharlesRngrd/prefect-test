@@ -1,0 +1,32 @@
+name: example_with_package
+prefect-version: 3.0.4
+
+build:
+
+push:
+
+pull:
+- prefect.deployments.steps.git_clone:
+    id: step_clone
+    repository: https://github.com/CharlesRngrd/prefect-test.git
+    branch: main
+    access_token:
+- prefect.deployments.steps.pip_install_requirements:
+    directory: '{{ step_clone-step.directory }}'
+    requirements_file: example_with_package/requirements.txt
+
+deployments:
+- name: my_deployment_with_package
+  version:
+  tags: []
+  description:
+  schedule: {}
+  entrypoint: example_with_package/flow.py:hello_world
+  parameters: {}
+  work_pool:
+    name: worker-1
+    work_queue_name:
+    job_variables: {}
+  concurrency_limit:
+  enforce_parameter_schema: true
+  schedules: []
